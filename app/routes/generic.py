@@ -1,5 +1,14 @@
+from flask import render_template
+from ..app import *
+
 import xml.etree.ElementTree as ET
 import json
+
+
+@app.route("/")
+def home():
+    return render_template("pages/home.html")
+
 
 
 def getJSON(path):

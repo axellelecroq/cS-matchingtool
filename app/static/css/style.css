@@ -1,0 +1,172 @@
+.btn {
+    color: darkslategray;
+    background-color: white;
+    border-color: white;
+}
+
+.pageFooter {
+    background-color: black;
+    position: relative;
+    width: 100%;
+    bottom: 0;
+}
+
+.h6-footer {
+    color: #cccccc !important;
+    padding-right: 2px;
+    padding-left: 2px;
+}
+
+.resultsTable {
+    padding-top: 30px;
+}
+
+.box {
+    display: block;
+    width: 50px;
+    height: 30px;
+    transition: width 1s, height 1s, transform 1s;
+}
+
+.homeText {
+    word-spacing: 5px;
+    text-align: justify;
+    font-size: 14px;
+    margin: 0px 30px 10px 120px;
+}
+
+.float {
+    width: 200px;
+    height: 100px;
+    float: right;
+}
+
+.searchInput {
+    border: 1px solid#939393;
+    padding: .1em .3em .3em .3em;
+    width: 25em;
+}
+
+.searchLabel {
+    color: black;
+    padding: .3em 1em 0 .5em;
+    vertical-align: top;
+}
+
+.searchSubmit {
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid#939393;
+}
+
+.personText {
+    font-size: 14px;
+}
+
+.personLabel {
+    font-weight: 700;
+    padding: 0px 15px 0px 120px;
+}
+
+.legendText {
+    font-size: 9px;
+    text-align: center;
+}
+
+.homeSubtitles {
+    padding-left: 60px;
+    font-weight: 500;
+    color: #dab880;
+    font-family: 'Font Awesome 5 Free';
+    font-style: italic;
+}
+
+.panoramaImage {
+    padding-bottom: 20px;
+}
+
+.homeImages {
+    padding-left: 10px
+}
+
+.backArrow {
+    padding-left: 60px;
+    color: bisque;
+}
+
+.backPageLink {
+    font-size: smaller;
+    font-weight: 200;
+    padding-left: 10px;
+    color: #dab880;
+    font-style: italic;
+}
+
+.formText {
+    word-spacing: 5px;
+    text-align: justify;
+    font-size: 14px;
+    margin: 0px 400px 10px 60px;
+}
+
+.flaskMessage {
+    font-size: 14px;
+    margin: 0px 30px 0px 120px;
+    color: red;
+    font-style: italic;
+    font-weight: 500;
+}
+
+.flashSuccessMessages {
+    font-size: 12px;
+    margin-left: auto;
+    margin-right: 30px;
+}
+
+.dataviz {
+    margin: 100px;
+}
+
+.toModifyLink {
+    font-size: 12px;
+    font-weight: 300;
+    padding-left: 2px;
+    color: #dab880;
+    font-style: italic;
+}
+
+.imageLabel {
+    font-size: 12px;
+    font-weight: 600;
+    padding-top: 20px;
+    font-style: italic;
+}
+
+.linkInfo {
+    font-size: 9px;
+    font-style: italic;
+}
+
+.addNew {
+    font-style: italic;
+    word-spacing: 5px;
+    text-align: justify;
+    font-size: 14px;
+    margin: 0px 30px 10px 120px;
+}
+
+.infoFormText {
+    word-spacing: 5px;
+    text-align: justify;
+    font-size: 14px;
+    margin: 30px 0px 10px 120px;
+    padding-left: 60px;
+    font-style: italic;
+}
+
+.datavizText {
+    word-spacing: 5px;
+    text-align: justify;
+    font-size: 14px;
+    margin: 0px 50px 10px 50px;
+}

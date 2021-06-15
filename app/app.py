@@ -6,9 +6,9 @@ from .constantes import CONFIG
 current_path = os.path.dirname(os.path.abspath(__file__))
 
 templates = os.path.join(current_path, "templates")
-data = os.path.join(current_path, "data")
+statics = os.path.join(current_path, "static")
 
-app = Flask("cS Matching Tool", template_folder=templates, statics_folder=data)
+app = Flask("cS Matching Tool", template_folder=templates, static_folder=statics)
 
 
 # local imports
