@@ -1,5 +1,5 @@
 import xml.etree.ElementTree as ET
-from .general import *
+from .generic import *
 
 def matching():
     tree = ET.parse('data/csdata.xml')

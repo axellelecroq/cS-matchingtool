@@ -7,6 +7,7 @@ current_path = os.path.dirname(os.path.abspath(__file__))
 
 templates = os.path.join(current_path, "templates")
 statics = os.path.join(current_path, "static")
+data = os.path.join(current_path, "data")
 
 app = Flask("cS Matching Tool", template_folder=templates, static_folder=statics)
 

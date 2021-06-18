@@ -1,15 +1,37 @@
-from flask import render_template
+from flask import render_template, flash, request
+from werkzeug.utils import secure_filename
 from ..app import *
+
 
 import xml.etree.ElementTree as ET
 import json
 
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def home():
+    if request.method.lower() == "post":
+        if request.files["records"]:
+            records = request.files["records"]
+            records.filename = "records.json"
+            upload_image(records)
+
+            flash(
+                "All good.",
+                category="success",
+            )
+
     return render_template("pages/home.html")
 
 
+def upload_image(file):
+        try:
+            file.save(os.path.join(data, secure_filename(file.filename)))
+        except Exception as E:
+            print(E)
+            flash(
+                "Error during the upload of the file.",
+                category="error",
+            )
 
 def getJSON(path):
     """
@@ -21,6 +43,7 @@ def getJSON(path):
     with open(path, encoding="iso-8859-15" ) as data_file:
        data = json.load(data_file)
     return data;
+
 
 def make_cmif(file:str):
     tree = ET.parse(file)
