@@ -1,12 +1,44 @@
 import xml.etree.ElementTree as ET
-from .generic import *
+import json
 
-def matching():
-    tree = ET.parse('data/csdata.xml')
+
+
+def getJSON(path):
+    """
+    Get data from a JSON file 
+    :param path: str
+    :return: data
+    :rtype: dict
+    """
+    with open(path, encoding="iso-8859-15" ) as data_file:
+       data = json.load(data_file)
+    return data;
+
+
+def make_cmif(file:str):
+    tree = ET.parse(file)
+    root = tree.getroot()
+
+    toremove= []
+
+    for child in root[0][1]:
+        if "corresp" not in child.attrib:
+            toremove.append(child)
+
+    for child in toremove:
+        root[0][1].remove(child)
+    
+    tree.write('app/data/output.xml',
+           xml_declaration=True, encoding='utf-8',
+           method="xml")
+
+
+def matching(file: str):
+    tree = ET.parse('app/data/csdata.xml')
     root = tree.getroot()
     ET.register_namespace('', "http://www.tei-c.org/ns/1.0")
 
-    data = getJSON("data/records_gnd.json")
+    data = getJSON(file)
 
     for record in data:
         # Handling senders
@@ -115,8 +147,8 @@ def matching():
              #   count_place +=1
                 #child.set('corresp', record["identifier"][1])
      
-    tree.write('data/matchs.xml',
+    tree.write('app/data/matchs.xml',
            xml_declaration=True,encoding='utf-8',
            method="xml")
 
-    make_cmif('data/matchs.xml')
+    make_cmif('app/data/matchs.xml')
