@@ -5,10 +5,46 @@
     <h1>Matching tool</h1>
 </div>
 <div class="container contentBottom" id="home">
-    <form class="form" enctype="multipart/form-data" action="" method="POST">
-        <input type="file" name="records"><br>
-        <button class="searchSubmit" type="submit">submit</button></td>
+    <div class='row'>
+    <div class='col box'>
+    <p>Upload the json file of your letters.</p>
+    <form class="form" enctype="multipart/form-data" action="" method="POST" style='margin-left: 0.5em;'>
+        <div class='form-row'>
+              <span class="custom-file">
+                  <input type="file" name="records" class="custom-file-label">
+              </span>
+              <span>
+                  <input type="submit" value="Submit" style='margin-top: 1em;'>
+                </span>
+        </div>
     </form>
-
+</div>
+    <div class='col box'>
+    <p>Enter the different elements of one letter.</p>
+        <form class="form" enctype="multipart/form-data" action=""  style='margin-left: 0.5em;'> <!--method="POST"-->
+        
+        <label >Sender</label>
+        <div class='form-row'>
+            <div class='col-5'>
+        <input type="text" id="senderName" name="senderNname" value="Name" class="formInput"></div>
+        <div class='col'>
+        <input type="text" id="senderURI" name="senderNname" value="GND URI" class="form-control"></div>
+    </div>
+        <label >Addressee</label>
+        <div class='form-row'>
+            <div class='col-5'>
+        <input type="text" id="addresseeName" name="addresseeName" value="Name" class="formInput"></div>
+        <div class='col'>
+        <input type="text" id="addresseeURI" name="addresseeURI" value="GND URI" class="form-control"></div>
+    </div>
+        <label >Coverage place</label><br>
+        <div class='form-row'>
+        <input type="text" id="coveragePlace" name="coveragePlace" value="Place name" class="form-control"></div>
+        <label >Date</label>
+        <div class='form-row'>
+        <input type="text" id="date" name="date" value="YYYY-MM-DD" class="formInput"></div>
+        <input type="submit" value="Submit">
+    </form>
+</div>
 </div>
 <br> {% endblock content %}

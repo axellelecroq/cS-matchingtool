@@ -67,7 +67,7 @@
         color: black;
         text-align: left;
         margin: 0;
-        background-color: #fff
+        background-color: #EAEAEA;
     }
     
     [tabindex="-1"]:focus:not(:focus-visible) {
@@ -2141,7 +2141,7 @@
     
     .form-control {
         display: block;
-        width: 25em;
+        width: 18em;
         height: calc(1.5em + .75rem + 2px);
         padding: .375rem .75rem;
         font-size: 1rem;
@@ -2302,7 +2302,8 @@
         -ms-flex-wrap: wrap;
         flex-wrap: wrap;
         margin-right: -5px;
-        margin-left: -5px
+        margin-left: -5px;
+        margin-bottom: 1.5em 
     }
     
     .form-row>.col,
