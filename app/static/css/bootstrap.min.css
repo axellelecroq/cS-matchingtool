@@ -378,19 +378,21 @@
     h4,
     h5,
     h6 {
-        margin-bottom: 0.5rem;
-        font-weight: 500;
+
+        font-weight: bold;
         line-height: 1.2
     }
     
     .h1,
     h1 {
-        font-size: 3.5rem
+        font-size: 2rem;
+        margin:2em 0 0 12.5em
     }
     
     .h2,
     h2 {
-        font-size: 2rem
+        font-size: 1.5rem;
+        margin: 0.5em 0 0 16.7em;
     }
     
     .h3,
@@ -571,6 +573,7 @@
     
     .container {
         width: 100%;
+        padding: 1.5em 0em 1em 0;
         padding-right: 15px;
         padding-left: 15px;
         margin-right: auto;
@@ -4459,7 +4462,8 @@
     
     .nav-link {
         display: block;
-        padding: .5rem 1rem
+        padding: .5rem 1rem;
+        color:white
     }
     
     .nav-link:focus,
@@ -4468,7 +4472,7 @@
     }
     
     .nav-link.disabled {
-        color: #6c757d;
+        color: white;
         pointer-events: none;
         cursor: default
     }
@@ -4547,15 +4551,15 @@
         position: sticky;
         display: -ms-flexbox;
         display: flex;
-        margin-top: 0;
+        margin: 0 !important;
         -ms-flex-wrap: wrap;
         flex-wrap: wrap;
         -ms-flex-align: center;
         align-items: center;
         -ms-flex-pack: justify;
         justify-content: space-between;
-        padding: 1rem 6.5rem;
-        background-color: #383838;
+        padding: 0rem 24.5rem;
+        background-color: #914100;
         color: white;
         font-family: PT-Sherif;
         font-size: large;

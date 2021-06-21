@@ -3,7 +3,14 @@
 <!-- header : navbar -->
 
 <nav class="navbar navbar-expand-lg" role="navigation">
-    <span>Home</span>
+    <span><a href="{{ url_for('home')}}" title="Home"><i class="fas fa-home" style='color:white' ></i></span>
+    <div class="container-fluid">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('handle_matching')}}" style='color:white; padding-left: 5rem;'>Matching tool</a>
+            </li>
+        </ul>
+        <div>
 
 
 </nav>
@@ -21,9 +28,9 @@
 
         <div class="row text-center justify-content-center ">
             <div>
-                <h6>
+               <!-- <h6>
                     <a href="https://github.com/axellelecroq/" target="_blank">Axelle Lecroq</a>
-                </h6>
+                </h6>-->
             </div>
         </div>
     </div>
