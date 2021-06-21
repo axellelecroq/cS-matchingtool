@@ -19,17 +19,25 @@ def getJSON(path):
 
 
 def upload_file(file):
-        try:
-            file.save(os.path.join(data, secure_filename(file.filename)))
-        except Exception as E:
-            print(E)
-            flash(
-                "Error during the upload of the file.",
-                category="error",
-            )
+    """
+    Upload a file inputed by user
+    :param file : str
+    """
+    try:
+        file.save(os.path.join(data, secure_filename(file.filename)))
+    except Exception as E:
+        print(E)
+        flash(
+            "Error during the upload of the file.",
+            category="error",
+        )
 
 
 def make_cmif(file:str):
+    """
+    Create the CMIF file of matching letters.
+    :param file : str
+    """
     tree = ET.parse(file)
     root = tree.getroot()
 
