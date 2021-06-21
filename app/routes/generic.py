@@ -6,20 +6,21 @@ from ..app import *
 from ..utils.matching import matching
 from ..utils.generic  import upload_file
 
-
-
-
-@app.route("/", methods=["GET", "POST"])
+@app.route('/')
 def home():
+    return render_template('pages/home.html')
+
+@app.route("/matching", methods=["GET", "POST"])
+def handle_matching():
     if request.method.lower() == "post":
         if request.files["records"]:
-            records = request.files["records"]
-            records.filename = "records.json"
-            upload_file(records)
+            file = request.files["records"]
+            file.filename = "records.json"
+            upload_file(file)
             matching("app/data/records.json")
             return redirect('/download')
         
-    return render_template("pages/home.html")
+    return render_template("pages/matchingtool.html")
 
 
 @app.route("/download", methods=["GET", "POST"])
