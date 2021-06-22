@@ -397,7 +397,9 @@
     
     .h3,
     h3 {
-        font-size: 1.75rem
+        font-size: 1.7rem;
+        font-family: PTSerif;
+        margin: -0.2rem 0 1.5rem 0.4rem
     }
     
     .h4,
@@ -2143,7 +2145,6 @@
         display: block;
         width: 18em;
         height: calc(1.5em + .75rem + 2px);
-        padding: .375rem .75rem;
         font-size: 1rem;
         font-weight: 400;
         line-height: 1.5;
@@ -6977,7 +6978,8 @@
         border-right-color: transparent;
         border-radius: 50%;
         -webkit-animation: spinner-border .75s linear infinite;
-        animation: spinner-border .75s linear infinite
+        animation: spinner-border .75s linear infinite;
+        color:#AC4D00;
     }
     
     .spinner-border-sm {

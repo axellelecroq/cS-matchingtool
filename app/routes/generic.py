@@ -17,11 +17,13 @@ def handle_matching():
             file = request.files["records"]
             upload_file(file)
             matching("app/data/{filename}".format(filename=file.filename))
-            return render_template("pages/matchingtool.html", download= True)
+            return render_template("pages/matchingtool.html", download= True, wait=False)
 
-    elif request.method.lower() == "post" and 'download' in request.form:
-        print('ok')
-        return send_file("app/data/output.xml", as_attachment=True, attachment_filename="matchs.xml")
+    elif request.method.lower() == "post" and 'downloadOnly' in request.form:
+        return send_file("app/data/output.xml", as_attachment=True, attachment_filename="output.xml")
+        
+    elif request.method.lower() == "post" and 'downloadAll' in request.form:
+            return send_file("app/data/output.xml", as_attachment=True, attachment_filename="matchs.xml")
         
     return render_template("pages/matchingtool.html", download= False)
 

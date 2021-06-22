@@ -1,5 +1,12 @@
 {% extends 'container.html' %} {% block content %}
 
+<script type="text/javascript">
+    function loading(){
+        document.getElementById("spinner").innerHTML = "<div class='spinner-border m-5' role='status'><span class='sr-only'>Loading...</span>";     
+    }
+    </script>
+
+
 <br>
 <div class='contentTop'>
     <h1>Matching tool</h1>
@@ -7,29 +14,36 @@
 <div class="container contentBottom" id="home">
     <div class='row'>
     <div class='col box'>
-    <p>Upload</p>
+    <h3>Upload</h3>
     <form class="form" enctype="multipart/form-data" action="" method="POST" style='margin-left: 0.5em;'>
-        <div class='form-row'>
-              <span class="custom-file">
-                  <input type="file" name="records" class="custom-file-label">
-              </span>
-              <span>
-                  <input type="submit" value="Submit" name='upload' style='margin-top: 1em;'>
-                </span>
-        </div>
+              <p>
+                  <input type="file" name="records" class='downloadBtn'>
+              </p>
+              <p>
+                  <input type="submit" value="Submit" name='upload' style='margin-top: 1em;' class='downloadBtn' onclick='loading()'>
+              </p>
     </form>
 </div>
 
     <div class='col box'>
         
-    <p>Downloads</p>
+    <h3>Downloads</h3>
     {% if download == True %}
         <form class="form" enctype="multipart/form-data" action="" method="POST" style='margin-left: 0.5em;'>
         
-        <input type="submit" value="Submit" name='download'>
+        <p><input type="submit" value="Download" name='downloadOnly' class='downloadBtn'><span>only the matchs.</span></p>
+        <p><input type="submit" value="Download" name='downloadAll' class='downloadBtn'><span>your input file with Kalliope's link added for matchs.</span></p>
+        
     </form>
+
+    
+
     {% else %}
-    <div class='col'>
+    <div class='col' id='spinner' >
+        <p style='margin-left:-0.4em'>Upload your CMIF file to download the matchs.</p>
+        
+          </div>
+
         {% endif %}
 </div>
 
