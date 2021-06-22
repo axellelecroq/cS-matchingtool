@@ -15,9 +15,9 @@ def handle_matching():
     if request.method.lower() == "post":
         if request.files["records"]:
             file = request.files["records"]
-            file.filename = "records.json"
+            file.filename = "csdata.xml"
             upload_file(file)
-            matching("app/data/records.json")
+            matching("app/data/csdata.xml")
             return redirect('/download')
         
     return render_template("pages/matchingtool.html")

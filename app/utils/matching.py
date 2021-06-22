@@ -1,122 +1,91 @@
 
 import xml.etree.ElementTree as ET
 import json
+import requests
 
-from .generic import getJSON, make_cmif
+from .generic import make_cmif
 
 def matching(file: str):
-    tree = ET.parse('app/data/csdata.xml')
-    root = tree.getroot()
+    tree = ET.parse(file)
+    root_cs = tree.getroot()
     ET.register_namespace('', "http://www.tei-c.org/ns/1.0")
 
-    data = getJSON(file)
+    # ---- Kalliope
+    kalliope_links = ["https://kalliope-verbund.info/sru?version=1.2&operation=searchRetrieve&query=ead.addressee.gnd%3D%3D%22118554700%22+AND+ead.genre%3D%3D%22Brief%22&maximumRecords=5000&recordSchema=mods", "https://kalliope-verbund.info/sru?version=1.2&operation=searchRetrieve&query=ead.creator.gnd%3D%3D%22118554700%22+AND+ead.genre%3D%3D%22Brief%22&maximumRecords=5000&recordSchema=mods"]
 
-    for record in data:
-        # Handling senders
-        s_status = ""
-    
-        try :
-            sender = ''
-            for key in record.keys():
-                if key == 'creator_gnd':
-                    sender = record['creator_gnd']
-            if sender == '' :
-                if "," not in record["creator"] and "(" not in record["creator"] and type(record["creator"]) != list :
-                    sender = record["creator"]
-                elif type(record["creator"]) != list:
-                    creator = record["creator"].split(" (")[0]
-                    name = creator.split(", ")[0]
-                    firstname = creator.split(", ")[1]
-                    sender = firstname + " " + name
-                else : 
-                    sender = "Unbekannt" # 261 entrées avec une liste comme creator
-                      # Gestion des listes d'envoyeur à faire
-        except KeyError: 
-            sender = "Unbekannt"
-        except IndexError : 
-            try :
-                sender = record["creator"].split(" (")[0]
-                if "," in record["creator"].split(" (")[1].split(", ")[1]:
-                    s_status = record["creator"].split(" (")[1].split(", ")[1].split(", ")[0]
-                else : s_status = record["creator"].split(" (")[1].split(", ")[1]
-                if ")" in s_status :
-                    s_status = s_status.replace(")", "")
-            except IndexError : 
-                sender = record["creator"].split("(")[0]
-            
-    # Handling addressee  
-        try : 
-            addressee =  '' 
-            for key in record.keys():
-                if key == 'subject_gnd':
-                    addressee = record['subject_gnd']
+    for request in kalliope_links:
+        root_k = ET.fromstring(requests.get(request).content)
+        for record in root_k[2]:
+            date = ''
+            place = ''
+            for recordInfo in record[2][0]: 
+                # Kalliope link / identifier
+                if recordInfo.tag == '{http://www.loc.gov/mods/v3}identifier':
+                    identifier = recordInfo.text
         
-            if addressee == '':
-                addressee = record["subject"]
-        except KeyError:
-            addressee = "Unbekannt"
-    
-     # Handling date
-        try :
-            date = record["date"]
+                # Addressee and sender
+                for person in recordInfo.iter('{http://www.loc.gov/mods/v3}name'):
+                    for role in person.find('{http://www.loc.gov/mods/v3}role'):
+                        if role.text == 'addressee':
+                            try:
+                                addr_uri = person.attrib['valueURI']
+                            except : addr_uri = ''
+                        if role.text == 'author':
+                            try:
+                                auth_uri = person.attrib['valueURI']
+                            except : auth_uri = ''
+        
+                # Coverage place
+                for place in recordInfo.findall('.//{http://www.loc.gov/mods/v3}placeTerm'):
+                    place = place.text
+                    if '[' in place :
+                        place = place.split(' [')[0]
+                    elif '(' in place :
+                        place = place.split(' (')[0]
+                # Date
+                for date in recordInfo.findall('.//{http://www.loc.gov/mods/v3}dateCreated'):
+                    date = date.text
 
-        except KeyError:
-            date = "00-00-00"
-        
-    # Handling place
-        try :
-            place = record["coverage"]
-            unbekannt = ["o. O.", "Ohne Ort", "o.O.", "o.D."]
-            if place in unbekannt:
-                place = ""
-            if type(place) == list:
-                place = "" # TODO gestion des listes dans place
-        except : place = ""
-    
-    # ---- correspSearch
-        for child in root[0][1]:
-        # Handle sender
-            try :
-                cs_sender = child[0][0].attrib["ref"]
-            except :
-                cs_sender = child[0][0].text
-                if cs_sender == None :
-                    cs_sender = "Unbekannt"
-        # Handle addresse        
-            try:
-                cs_addressee = child[1][0].attrib["ref"]
-            except:
-                cs_addressee = child[1][0].text
-                if cs_addressee == None :
-                    cs_addressee = "Unbekannt"
+        # ---- correspSearch
+            for child in root_cs[0][1]:
+            # Handle sender
+                try :
+                    cs_sender = child[0][0].attrib["ref"]
+                except :
+                    cs_sender = child[0][0].text
+                    if cs_sender == None :
+                        cs_sender = "Unbekannt"
+            # Handle addresse        
+                try:
+                    cs_addressee = child[1][0].attrib["ref"]
+                except:
+                    cs_addressee = child[1][0].text
+                    if cs_addressee == None :
+                        cs_addressee = "Unbekannt"
                 
-        # Handle place        
-            try:
-                cs_place = child[0][1].text
+            # Handle place        
+                try:
+                    cs_place = child[0][1].text
         
-                if cs_place == None: 
-                    try :
-                        cs_place = child[0][2].text
+                    if cs_place == None: 
+                        try :
+                            cs_place = child[0][2].text
+                        except: 
+                            cs_place = cs_place = child[1][1].text
+                except: cs_place = "Unbekannt"
+            
+            # Handle date        
+                try: 
+                    cs_date = child[0][2].attrib["when"]
+                except:
+                    try : 
+                        cs_date = child[0][1].attrib["when"]
                     except: 
-                        cs_place = cs_place = child[1][1].text
-            except: cs_place = "Unbekannt"
+                        try : cs_date = child[1][1].attrib["when"]
+                        except : cs_date = "00-00-00"
             
-        # Handle date        
-            try: 
-                cs_date = child[0][2].attrib["when"]
-            except:
-                try : 
-                    cs_date = child[0][1].attrib["when"]
-                except: 
-                    try : cs_date = child[1][1].attrib["when"]
-                    except : cs_date = "00-00-00"
-            
-            if  sender == cs_sender and addressee == cs_addressee and place == cs_place and date == cs_date and date != "00-00-00":
-                child.set('corresp', record["identifier"][1])
-
-            #elif  sender == cs_sender and addressee == cs_addressee and date == cs_date and date != "00-00-00":
-             #   count_place +=1
-                #child.set('corresp', record["identifier"][1])
+                if  auth_uri == cs_sender and addr_uri == cs_addressee and date == cs_date and date != "00-00-00":
+                    child.set('corresp', identifier)
      
     tree.write('app/data/matchs.xml',
            xml_declaration=True,encoding='utf-8',
