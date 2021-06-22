@@ -12,19 +12,16 @@ def home():
 
 @app.route("/matching", methods=["GET", "POST"])
 def handle_matching():
-    if request.method.lower() == "post":
+    if request.method.lower() == "post" and 'upload' in request.form:
         if request.files["records"]:
             file = request.files["records"]
-            file.filename = "csdata.xml"
             upload_file(file)
-            matching("app/data/csdata.xml")
-            return redirect('/download')
-        
-    return render_template("pages/matchingtool.html")
+            matching("app/data/{filename}".format(filename=file.filename))
+            return render_template("pages/matchingtool.html", download= True)
 
-
-@app.route("/download", methods=["GET", "POST"])
-def save_file():
-    if request.method.lower() == "post":
+    elif request.method.lower() == "post" and 'download' in request.form:
+        print('ok')
         return send_file("app/data/output.xml", as_attachment=True, attachment_filename="matchs.xml")
-    return render_template("pages/download.html")
+        
+    return render_template("pages/matchingtool.html", download= False)
+
