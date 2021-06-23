@@ -1,0 +1,19 @@
+{% extends 'container.html' %} {% block content %}
+
+<br>
+<div class='contentTop'>
+    <h1>Matching tool</h1>
+</div>
+<div class="container contentBottom" id="downloadPage">
+    <div class='row'>
+        <div class='col box'>
+            <h3>Downloads</h3>
+            <form class="form" enctype="multipart/form-data" action="" method="POST" style='margin-left: 0.5em;'>
+
+                <p><input type="submit" value="Download" name='downloadOnly' class='downloadBtn'><span>only the matchs.</span></p>
+                <p><input type="submit" value="Download" name='downloadAll' class='downloadBtn'><span>your input file with Kalliope's link added for matchs.</span></p>
+
+            </form>
+        </div>
+    </div>
+    <br> {% endblock content %}
