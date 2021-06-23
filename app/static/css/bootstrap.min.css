@@ -378,7 +378,6 @@
     h4,
     h5,
     h6 {
-
         font-weight: bold;
         line-height: 1.2
     }
@@ -386,7 +385,8 @@
     .h1,
     h1 {
         font-size: 2rem;
-        margin:2em 0 0 12.5em
+        margin: 2em 0 0 6.5em;
+        position: relative
     }
     
     .h2,
@@ -2304,7 +2304,7 @@
         flex-wrap: wrap;
         margin-right: -5px;
         margin-left: -5px;
-        margin-bottom: 1.5em 
+        margin-bottom: 1.5em
     }
     
     .form-row>.col,
@@ -4465,7 +4465,7 @@
     .nav-link {
         display: block;
         padding: .5rem 1rem;
-        color:white
+        color: white
     }
     
     .nav-link:focus,
@@ -4560,7 +4560,7 @@
         align-items: center;
         -ms-flex-pack: justify;
         justify-content: space-between;
-        padding: 0rem 24.5rem;
+        padding: 0rem 12.5rem;
         background-color: #914100;
         color: white;
         font-family: PT-Sherif;
@@ -6979,7 +6979,7 @@
         border-radius: 50%;
         -webkit-animation: spinner-border .75s linear infinite;
         animation: spinner-border .75s linear infinite;
-        color:#AC4D00;
+        color: #AC4D00;
     }
     
     .spinner-border-sm {
