@@ -10,6 +10,9 @@ def matching(file: str):
     root_cs = tree.getroot()
     ET.register_namespace('', "http://www.tei-c.org/ns/1.0")
 
+    possibles = {}
+    count = 0 
+
     # ---- Kalliope
     kalliope_links = ["https://kalliope-verbund.info/sru?version=1.2&operation=searchRetrieve&query=ead.addressee.gnd%3D%3D%22118554700%22+AND+ead.genre%3D%3D%22Brief%22&maximumRecords=5000&recordSchema=mods", "https://kalliope-verbund.info/sru?version=1.2&operation=searchRetrieve&query=ead.creator.gnd%3D%3D%22118554700%22+AND+ead.genre%3D%3D%22Brief%22&maximumRecords=5000&recordSchema=mods"]
 
@@ -84,11 +87,17 @@ def matching(file: str):
                         try : cs_date = child[1][1].attrib["when"]
                         except : cs_date = "00-00-00"
             
-                if  auth_uri == cs_sender and addr_uri == cs_addressee and date == cs_date and date != "00-00-00":
+                if  auth_uri == cs_sender and addr_uri == cs_addressee and date == cs_date and date != "00-00-00" and place == cs_place:
                     child.set('corresp', identifier)
+                elif  auth_uri == cs_sender and addr_uri == cs_addressee and date == cs_date and date != "00-00-00" :
+                    possibles[count]= [[auth_uri, cs_sender], [addr_uri, cs_addressee], [date, cs_date], [place, cs_place], identifier]
+                    count +=1
      
     tree.write('app/data/matchs.xml',
            xml_declaration=True,encoding='utf-8',
            method="xml")
+    
+    return possibles
 
-    make_cmif('app/data/matchs.xml')
+    #make_cmif('app/data/matchs.xml')
+

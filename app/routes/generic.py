@@ -16,10 +16,12 @@ def handle_matching():
         if request.files["records"]:
             file = request.files["records"]
             upload_file(file)
-            matching("app/data/{filename}".format(filename=file.filename))
-            return render_template("pages/matchingtool.html", download= True, wait=False)
+            possibles = matching("app/data/{filename}".format(filename=file.filename))
+            print(possibles)
+            return render_template("pages/matchingtool.html", uploaded = True, matchs = possibles)
+        
+    return render_template("pages/matchingtool.html", uploaded= False)
 
-    elif request.method.lower() == "post" and 'downloadOnly' in request.form:
 @app.route("/download", methods=["GET", "POST"])
 def save_file():
     if request.method.lower() == "post" and 'downloadOnly' in request.form:

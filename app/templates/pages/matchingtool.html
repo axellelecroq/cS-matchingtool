@@ -1,50 +1,89 @@
 {% extends 'container.html' %} {% block content %}
 
 <script type="text/javascript">
-        document.getElementById("spinner").innerHTML = "<div class='spinner-border m-5' role='status'><span class='sr-only'>Loading...</span>";     
+    function loading() {
+        document.getElementById("spinner").innerHTML = "<div class='spinner-border m-5' role='status'><span class='sr-only'>Loading...</span>";
     }
-    </script>
+</script>
 
 
 <br>
 <div class='contentTop'>
     <h1>Matching tool</h1>
 </div>
-<div class="container contentBottom" id="home">
+<div class="container contentBottom" id="matchTool">
     <div class='row'>
-    <div class='col box'>
-    <h3>Upload</h3>
-    <form class="form" enctype="multipart/form-data" action="" method="POST" style='margin-left: 0.5em;'>
-              <p>
-                  <input type="file" name="records" class='downloadBtn'>
-              </p>
-              <p>
-                  <input type="submit" value="Submit" name='upload' style='margin-top: 1em;' class='downloadBtn' onclick='loading()'>
-              </p>
-    </form>
-</div>
+        {% if uploaded == False %}
+        <div class='col-3 box'>
+            <h3>Upload</h3>
+            <form class="form" enctype="multipart/form-data" action="" method="POST" style='margin-left: 0.5em;'>
+                <p><input type="file" name="records" class='downloadBtn'></p>
+                <p><input type="submit" value="Submit" name='upload' style='margin-top: 1em;' class='downloadBtn' onclick='loading()'></p>
+            </form>
+        </div>
+        {%endif%}
 
-    <div class='col box'>
-        
-    <h3>Downloads</h3>
-    {% if download == True %}
-        <form class="form" enctype="multipart/form-data" action="" method="POST" style='margin-left: 0.5em;'>
-        
-        <p><input type="submit" value="Download" name='downloadOnly' class='downloadBtn'><span>only the matchs.</span></p>
-        <p><input type="submit" value="Download" name='downloadAll' class='downloadBtn'><span>your input file with Kalliope's link added for matchs.</span></p>
-        
-    </form>
+        <div class='col box'>
+            <h3>Matchs</h3>
+            {% if uploaded == True %}
+            <p style="margin: 0 0.5em 1rem 0.5em;">There are XX full matchs.</p>
+            <h3>Possibles matchs</h3>
+            <div style="margin: 0 0.5em 0em 0.5em;">
+                <p>Check the box if you consider it is a good match and submit your choices to put these matchs in the complete CMIF file.</p>
 
-    
+                <table class="table table-sm">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Element</th>
+                            <th scope="col">Kalliope data</th>
+                            <th scope="col">cS data</th>
+                        </tr>
+                    </thead>
+                    {% for match in matchs%}
+                    <tbody>
+                        <tr>
+                            <td><input type="radio" id="{{matchs}}"></td>
+                            <th scope="row">Sender</th>
+                            <td><a href="{{matchs[match][0][0]}}" target="_blank">{{matchs[match][0][0]}}</a></td>
+                            <td><a href="{{matchs[match][0][1]}}" target="_blank">{{matchs[match][0][1]}}</a></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <th scope="row">Addressee</th>
+                            <td><a href="{{matchs[match][1][0]}}" target="_blank">{{matchs[match][1][0]}}</a></td>
+                            <td><a href="{{matchs[match][1][1]}}" target="_blank">{{matchs[match][1][1]}}</a></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <th scope="row">Date</th>
+                            <td>{{matchs[match][2][0]}}</td>
+                            <td>{{matchs[match][2][1]}}</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <th scope="row">Coverage place</th>
+                            <td>{{matchs[match][3][0]}}</td>
+                            <td>{{matchs[match][3][1]}}</td>
+                        </tr>
 
-    {% else %}
-    <div class='col' id='spinner' >
-        <p style='margin-left:-0.4em'>Upload your CMIF file to download the matchs.</p>
-        
-          </div>
-
-        {% endif %}
-</div>
-
-</div>
-<br> {% endblock content %}
+                        <tr>
+                            <td></td>
+                            <th scope="row">Link</th>
+                            <td>
+                                <a href="{{matchs[match][4]}}" target="_blank">on Kalliope</a></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                    {%endfor%}
+                </table>
+                <div style="float: right;"><input type="submit" value="Submit" name='makecmif' style='margin-top: 1em;' class='downloadBtn'></div>
+            </div>
+            {% else %}
+            <div class='col' id='spinner'>
+                <p style='margin-left:-0.4em'>Upload your CMIF file to see the matchs.</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <br> {% endblock content %}
