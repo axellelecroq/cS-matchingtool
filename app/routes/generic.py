@@ -20,10 +20,12 @@ def handle_matching():
             return render_template("pages/matchingtool.html", download= True, wait=False)
 
     elif request.method.lower() == "post" and 'downloadOnly' in request.form:
+@app.route("/download", methods=["GET", "POST"])
+def save_file():
+    if request.method.lower() == "post" and 'downloadOnly' in request.form:
         return send_file("app/data/output.xml", as_attachment=True, attachment_filename="output.xml")
         
     elif request.method.lower() == "post" and 'downloadAll' in request.form:
             return send_file("app/data/output.xml", as_attachment=True, attachment_filename="matchs.xml")
-        
-    return render_template("pages/matchingtool.html", download= False)
 
+    return render_template("pages/download.html")
