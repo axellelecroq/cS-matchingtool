@@ -29,9 +29,11 @@
             <p style="margin: 0 0.5em 1rem 0.5em;">There are XX full matchs.</p>
             <h3>Possibles matchs</h3>
             <div style="margin: 0 0.5em 0em 0.5em;">
+                {%if matchs%}
                 <p>Check the box if you consider it is a good match and submit your choices to put these matchs in the complete CMIF file.</p>
 
                 <table class="table table-sm">
+
                     <thead class="thead-light">
                         <tr>
                             <th scope="col"></th>
@@ -89,6 +91,7 @@
                     {%endfor%}
                 </table>
                 <div style="float: right;"><input type="submit" value="Submit" name='makecmif' style='margin-top: 1em;' class='downloadBtn'></div>
+                {%else%} There is no possible matchs that need to be checked in the file you uploaded. Your can upload the file with all full matchs or try with another file.{%endif%}
             </div>
             {% else %}
             <div class='col' id='spinner'>
