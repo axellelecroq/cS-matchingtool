@@ -51,53 +51,51 @@ def matching(file: str):
 
         # ---- correspSearch
             for child in root_cs[0][1]:
-            # Handle sender
-                try :
-                    cs_sender = child[0][0].attrib["ref"]
-                except :
-                    cs_sender = child[0][0].text
-                    if cs_sender == None :
-                        cs_sender = "Unbekannt"
-            # Handle addresse        
-                try:
-                    cs_addressee = child[1][0].attrib["ref"]
-                except:
-                    cs_addressee = child[1][0].text
-                    if cs_addressee == None :
-                        cs_addressee = "Unbekannt"
+                if "corresp" not in child.attrib:
+                # Handle sender
+                    try :
+                        cs_sender = child[0][0].attrib["ref"]
+                    except :
+                        cs_sender = child[0][0].text
+                        if cs_sender == None :
+                            cs_sender = "Unbekannt"
+                # Handle addresse        
+                    try:
+                        cs_addressee = child[1][0].attrib["ref"]
+                    except:
+                        cs_addressee = child[1][0].text
+                        if cs_addressee == None :
+                            cs_addressee = "Unbekannt"
                 
-            # Handle place        
-                try:
-                    cs_place = child[0][1].text
+                # Handle place        
+                    try:
+                        cs_place = child[0][1].text
         
-                    if cs_place == None: 
-                        try :
-                            cs_place = child[0][2].text
+                        if cs_place == None: 
+                            try :
+                                cs_place = child[0][2].text
+                            except: 
+                                cs_place = cs_place = child[1][1].text
+                    except: cs_place = "Unbekannt"
+            
+                # Handle date        
+                    try: 
+                        cs_date = child[0][2].attrib["when"]
+                    except:
+                        try : 
+                            cs_date = child[0][1].attrib["when"]
                         except: 
-                            cs_place = cs_place = child[1][1].text
-                except: cs_place = "Unbekannt"
+                            try : cs_date = child[1][1].attrib["when"]
+                            except : cs_date = "00-00-00"
             
-            # Handle date        
-                try: 
-                    cs_date = child[0][2].attrib["when"]
-                except:
-                    try : 
-                        cs_date = child[0][1].attrib["when"]
-                    except: 
-                        try : cs_date = child[1][1].attrib["when"]
-                        except : cs_date = "00-00-00"
-            
-                if  auth_uri == cs_sender and addr_uri == cs_addressee and date == cs_date and date != "00-00-00" and place == cs_place:
-                    child.set('corresp', identifier)
-                elif  auth_uri == cs_sender and addr_uri == cs_addressee and date == cs_date and date != "00-00-00" :
-                    possibles[count]= [[auth_uri, cs_sender], [addr_uri, cs_addressee], [date, cs_date], [place, cs_place], identifier]
-                    count +=1
+                    if  auth_uri == cs_sender and addr_uri == cs_addressee and date == cs_date and date != "00-00-00" and place == cs_place:
+                        child.set('corresp', identifier)
+                    elif  auth_uri == cs_sender and addr_uri == cs_addressee and date == cs_date and date != "00-00-00" :
+                        possibles[count]= [[auth_uri, cs_sender], [addr_uri, cs_addressee], [date, cs_date], [place, cs_place], identifier]
+                        count +=1
      
     tree.write('app/data/matchs.xml',
            xml_declaration=True,encoding='utf-8',
            method="xml")
     
     return possibles
-
-    #make_cmif('app/data/matchs.xml')
-
