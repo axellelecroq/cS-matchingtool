@@ -4,7 +4,7 @@ import json
 
 from ..app import *
 from ..utils.matching import matching
-from ..utils.generic  import upload_file
+from ..utils.generic  import upload_file, count_corresp
 
 @app.route('/')
 def home():
@@ -17,8 +17,8 @@ def handle_matching():
             file = request.files["records"]
             upload_file(file)
             possibles = matching("app/data/{filename}".format(filename=file.filename))
-            print(possibles)
-            return render_template("pages/matchingtool.html", uploaded = True, matchs = possibles)
+            count = count_corresp("app/data/matchs.xml")
+            return render_template("pages/matchingtool.html", uploaded = True, matchs = possibles, count_fullmatchs = count)
         
     return render_template("pages/matchingtool.html", uploaded= False)
 

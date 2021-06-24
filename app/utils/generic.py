@@ -5,6 +5,23 @@ import json
 
 from ..app import *
 
+def count_corresp(file:str):
+    """
+    Return the count of letters with the attribute @corresp.
+    :param file: str
+    :return: count
+    :rtype: int
+    """
+    tree = ET.parse(file)
+    root = tree.getroot()
+    count = 0
+
+    for child in root[0][1]:
+        if "corresp" in child.attrib:
+            count +=1
+        
+    return count
+
 
 def getJSON(path):
     """
@@ -16,21 +33,6 @@ def getJSON(path):
     with open(path, encoding="iso-8859-15" ) as data_file:
        data = json.load(data_file)
     return data;
-
-
-def upload_file(file):
-    """
-    Upload a file inputed by user
-    :param file : str
-    """
-    try:
-        file.save(os.path.join(data, secure_filename(file.filename)))
-    except Exception as E:
-        print(E)
-        flash(
-            "Error during the upload of the file.",
-            category="error",
-        )
 
 
 def make_cmif(file:str):
@@ -83,3 +85,16 @@ def make_cmif(file:str):
            method="xml")
 
 
+def upload_file(file):
+    """
+    Upload a file inputed by user
+    :param file : str
+    """
+    try:
+        file.save(os.path.join(data, secure_filename(file.filename)))
+    except Exception as E:
+        print(E)
+        flash(
+            "Error during the upload of the file.",
+            category="error",
+        )

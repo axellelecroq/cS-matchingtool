@@ -26,11 +26,13 @@
         <div class='col box'>
             <h3>Matchs</h3>
             {% if uploaded == True %}
-            <p style="margin: 0 0.5em 1rem 0.5em;">There are XX full matchs.</p>
+            <p style="margin: 0 0.5em 0em 0.5em;">There are {{count_fullmatchs}} full matchs.</p>
+            <p style="margin: 0 0.5em 2em 0.5em;">A full match means that sender, addressee, coverage place and date matched.</p>
             <h3>Possibles matchs</h3>
             <div style="margin: 0 0.5em 0em 0.5em;">
                 {%if matchs%}
-                <p>Check the box if you consider it is a good match and submit your choices to put these matchs in the complete CMIF file.</p>
+                <p style="margin-bottom:0">The match is possible when sender, addresse and date matched. Only the coverage place doesn't match. </p>
+                <p>You can select the match if you consider it to be a match although the data doesn't match 100%. The selected matches will be added to the CMIF file once they are sumitted.</p>
 
                 <table class="table table-sm">
 
