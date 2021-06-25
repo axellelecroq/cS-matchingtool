@@ -3,11 +3,13 @@
 <!-- header : navbar -->
 
 <nav class="navbar navbar-expand-lg" role="navigation">
-    <span><a href="{{ url_for('home')}}" title="Home"><i class="fas fa-home" style='color:white' ></i></span>
     <div class="container-fluid">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('handle_matching')}}" style='color:white; padding-left: 2.5rem;'>Matching tool</a>
+                <a class="nav-link" href="{{ url_for('handle_matching')}}" style="font-weight: 600;">matchingTool</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('about')}}">about</a>
             </li>
         </ul>
         <div>

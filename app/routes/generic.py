@@ -6,11 +6,14 @@ from ..app import *
 from ..utils.matching import matching
 from ..utils.generic  import upload_file, count_corresp
 
-@app.route('/')
-def home():
-    return render_template('pages/home.html')
 
-@app.route("/matching", methods=["GET", "POST"])
+"""
+/
+/download
+/about
+"""
+
+@app.route("/", methods=["GET", "POST"])
 def handle_matching():
     if request.method.lower() == "post" and 'upload' in request.form:
         if request.files["records"]:
@@ -22,6 +25,7 @@ def handle_matching():
         
     return render_template("pages/matchingtool.html", uploaded= False)
 
+
 @app.route("/download", methods=["GET", "POST"])
 def save_file():
     if request.method.lower() == "post" and 'downloadOnly' in request.form:
@@ -31,3 +35,8 @@ def save_file():
             return send_file("app/data/output.xml", as_attachment=True, attachment_filename="matchs.xml")
 
     return render_template("pages/download.html")
+
+
+@app.route('/about')
+def about():
+    return render_template('pages/about.html')
