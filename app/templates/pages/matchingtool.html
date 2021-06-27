@@ -24,9 +24,13 @@
         {%endif%}
 
         <div class='col box'>
-            <h3>Matchs</h3>
-            {% if uploaded == True %}
-            <p style="margin: 0 0.5em 0em 0.5em;">There are {{count_fullmatchs}} full matchs.</p>
+            <div class="row-fluid">
+                <h3 style="display: inline-block;">Matchs</h3>
+                {% if uploaded == True %}
+                <form class="form" enctype="multipart/form-data" action="" method="POST" style='margin-left: 0.5em; display: inline-block'>
+                    <button type="submit" value="Download" name=' downloadOnly ' class='downloadBtn ' style="margin-left: 3em; margin-bottom: 0.8em;">Download</button>
+                </form>
+            </div>
             <p style="margin: 0 0.5em 2em 0.5em;">A full match means that sender, addressee, coverage place and date matched.</p>
             <h3>Possibles matchs</h3>
             <div style="margin: 0 0.5em 0em 0.5em;">
@@ -96,10 +100,11 @@
                 {%else%} There is no possible matchs that need to be checked in the file you uploaded. Your can upload the file with all full matchs or try with another file.{%endif%}
             </div>
             {% else %}
-            <div class='col' id='spinner'>
-                <p style='margin-left:-0.4em'>Upload your CMIF file to see the matchs.</p>
-            </div>
-            {% endif %}
         </div>
+        <div class='col' id='spinner'>
+            <p style='margin-left:-0.4em'>Upload your CMIF file to see the matchs.</p>
+        </div>
+        {% endif %}
     </div>
-    <br> {% endblock content %}
+</div>
+<br> {% endblock content %}

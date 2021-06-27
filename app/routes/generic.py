@@ -15,6 +15,7 @@ from ..utils.generic  import upload_file, count_corresp
 
 @app.route("/", methods=["GET", "POST"])
 def handle_matching():
+    print(request.form)
     if request.method.lower() == "post" and 'upload' in request.form:
         if request.files["records"]:
             file = request.files["records"]
@@ -22,6 +23,8 @@ def handle_matching():
             possibles = matching("app/data/{filename}".format(filename=file.filename))
             count = count_corresp("app/data/matchs.xml")
             return render_template("pages/matchingtool.html", uploaded = True, matchs = possibles, count_fullmatchs = count)
+    if request.method.lower() == "post" and 'downloadOnly' in request.form:
+        return send_file("app/data/matchs.xml", as_attachment=True, attachment_filename="matchs.xml")
         
     return render_template("pages/matchingtool.html", uploaded= False)
 
