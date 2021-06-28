@@ -4,7 +4,7 @@ import json
 
 from ..app import *
 from ..utils.matching import matching
-from ..utils.generic  import upload_file, count_corresp, add_selected_matchs
+from ..utils.generic  import make_cmif, upload_file, count_corresp, add_selected_matchs
 
 
 """
@@ -52,6 +52,7 @@ def handle_matching():
 @app.route("/download", methods=["GET", "POST"])
 def save_file():
     if request.method.lower() == "post" and 'downloadOnly' in request.form:
+        make_cmif('app/data/matchs.xml')
         return send_file("app/data/output.xml", as_attachment=True, attachment_filename="output.xml")
         
     elif request.method.lower() == "post" and 'downloadAll' in request.form:
