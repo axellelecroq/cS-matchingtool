@@ -28,9 +28,10 @@
                 <h3 style="display: inline-block;">Matchs</h3>
                 {% if uploaded == True %}
                 <form class="form" enctype="multipart/form-data" action="" method="POST" style='margin-left: 0.5em; display: inline-block'>
-                    <button type="submit" value="Download" name=' downloadOnly ' class='downloadBtn ' style="margin-left: 3em; margin-bottom: 0.8em;">Download</button>
+                    <input type="submit" value="Download" name='fullMatchs' class='downloadBtn ' style="margin-left: 3em; margin-bottom: 0.8em;">
                 </form>
             </div>
+            <p style="margin: 0 0.5em 0em 0.5em;">There are {{count_fullmatchs}} full matchs.</p>
             <p style="margin: 0 0.5em 2em 0.5em;">A full match means that sender, addressee, coverage place and date matched.</p>
             <h3>Possibles matchs</h3>
             <div style="margin: 0 0.5em 0em 0.5em;">
