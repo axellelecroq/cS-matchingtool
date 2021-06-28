@@ -44,7 +44,7 @@
                 {%if matchs%}
                 <p style="margin-bottom:0">The match is possible when sender, addresse and date matched. Only the coverage place doesn't match. </p>
                 <p>You can select the match if you consider it to be a match although the data doesn't match 100%. The selected matches will be added to the CMIF file once they are sumitted.</p>
-
+                <form class="form" enctype="multipart/form-data" action="" method="POST" style='margin-left: 0.5em; display: inline-block'>
                 <table class="table table-sm">
 
                     <thead class="thead-light">
@@ -58,7 +58,7 @@
                     {% for match in matchs%}
                     <tbody>
                         <tr>
-                            <td><input type="radio" id="{{matchs}}"></td>
+                            <td><input type="radio" name='selected' value="{{matchs}}" id="{{matchs}}"></td>
                             <th scope="row">Sender</th>
                             <td><a href="{{matchs[match][0][0]}}" target="_blank">{{matchs[match][0][0]}}</a></td>
                             <td><a href="{{matchs[match][0][1]}}" target="_blank">{{matchs[match][0][1]}}</a></td>
@@ -103,7 +103,11 @@
                     </tbody>
                     {%endfor%}
                 </table>
-                <div style="float: right;"><input type="submit" value="Submit" name='makecmif' style='margin-top: 1em;' class='downloadBtn'></div>
+                <div>
+                
+                    <input type="submit" value="Create the CMIF file" name='makecmif' class='downloadBtn ' style="margin-left: 3em; margin-bottom: 0.8em;">
+                </form>
+            </div>
                 {%else%} There is no possible matchs that need to be checked in the file you uploaded. Your can upload the file with all full matchs or try with another file.{%endif%}
             </div>
             {% else %}

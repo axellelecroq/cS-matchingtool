@@ -91,7 +91,7 @@ def matching(file: str):
                     if  auth_uri == cs_sender and addr_uri == cs_addressee and date == cs_date and date != "00-00-00" and place == cs_place:
                         child.set('corresp', identifier)
                     elif  auth_uri == cs_sender and addr_uri == cs_addressee and date == cs_date and date != "00-00-00" :
-                        possibles[count]= [[auth_uri, cs_sender], [addr_uri, cs_addressee], [date, cs_date], [place, cs_place], identifier, child]
+                        possibles[count]= [[auth_uri, cs_sender], [addr_uri, cs_addressee], [date, cs_date], [place, cs_place], identifier]
                         count +=1
      
     tree.write('app/data/matchs.xml',

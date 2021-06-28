@@ -4,7 +4,7 @@ import json
 
 from ..app import *
 from ..utils.matching import matching
-from ..utils.generic  import upload_file, count_corresp
+from ..utils.generic  import upload_file, count_corresp, add_selected_matchs
 
 
 """
@@ -23,7 +23,6 @@ def handle_matching():
     :return: template or send_file
     :rtype: template or xml file
     """
-
     if request.method.lower() == "post" and 'upload' in request.form:
         if request.files["records"]:
             file = request.files["records"]
@@ -41,6 +40,11 @@ def handle_matching():
 
     elif request.method.lower() == "post" and 'fullMatchs' in request.form:
         return send_file("app/data/matchs.xml", as_attachment=True, attachment_filename="matchs.xml")
+    
+    elif request.method.lower() == "post" and 'makecmif' in request.form:
+        print(request.form.getlist('selected'))
+        add_selected_matchs(request.form.getlist('selected'))
+        return render_template("pages/download.html")
         
     return render_template("pages/matchingtool.html", uploaded= False)
 
