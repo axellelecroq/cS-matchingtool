@@ -27,10 +27,16 @@ def handle_matching():
     if request.method.lower() == "post" and 'upload' in request.form:
         if request.files["records"]:
             file = request.files["records"]
-            upload_file(file)
-            possibles = matching("app/data/{filename}".format(filename=file.filename))
-            count = count_corresp("app/data/matchs.xml")
-            return render_template("pages/matchingtool.html", uploaded = True, matchs = possibles, count_fullmatchs = count)
+            print(file)
+            print(file.filename)
+            if file.filename.endswith('.xml'):
+                upload_file(file)
+                possibles = matching("app/data/{filename}".format(filename=file.filename))
+                count = count_corresp("app/data/matchs.xml")
+                return render_template("pages/matchingtool.html", uploaded = True, matchs = possibles, count_fullmatchs = count)
+            else :
+                message = 'Only CMIF file are accepted.'
+                return render_template("pages/matchingtool.html", uploaded= False, noCmif=message)
 
     elif request.method.lower() == "post" and 'fullMatchs' in request.form:
         return send_file("app/data/matchs.xml", as_attachment=True, attachment_filename="matchs.xml")

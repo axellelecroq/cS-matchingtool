@@ -17,9 +17,15 @@
         <div class='col-3 box'>
             <h3>Upload</h3>
             <form class="form" enctype="multipart/form-data" action="" method="POST" style='margin-left: 0.5em;'>
-                <p><input type="file" name="records" class='downloadBtn'></p>
+                <div class="custom-file">
+                <input type="file" name="records" class='form-control-file downloadBtn'>
+                </div>
                 <p><input type="submit" value="Submit" name='upload' style='margin-top: 1em;' class='downloadBtn' onclick='loading()'></p>
             </form>
+            {% if noCmif%}
+            <p>{{noCmif}}</p>
+        
+            {%endif%}
         </div>
         {%endif%}
 
