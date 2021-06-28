@@ -15,8 +15,15 @@ from ..utils.generic  import upload_file, count_corresp
 
 @app.route("/", methods=["GET", "POST"])
 def handle_matching():
-    print(request.form)
-    print(request.method)
+    """
+    Handle the matching process for user :
+        - upload CMIF file
+        - send possible matchs which have to be checked by the user
+        - download full matchs file during the checking process
+    :return: template or send_file
+    :rtype: template or xml file
+    """
+
     if request.method.lower() == "post" and 'upload' in request.form:
         if request.files["records"]:
             file = request.files["records"]
@@ -24,6 +31,7 @@ def handle_matching():
             possibles = matching("app/data/{filename}".format(filename=file.filename))
             count = count_corresp("app/data/matchs.xml")
             return render_template("pages/matchingtool.html", uploaded = True, matchs = possibles, count_fullmatchs = count)
+
     elif request.method.lower() == "post" and 'fullMatchs' in request.form:
         return send_file("app/data/matchs.xml", as_attachment=True, attachment_filename="matchs.xml")
         
