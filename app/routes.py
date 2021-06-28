@@ -2,9 +2,9 @@ from flask import render_template, flash, request, send_file, redirect
 import xml.etree.ElementTree as ET
 import json
 
-from ..app import *
-from ..utils.matching import matching
-from ..utils.generic  import make_cmif, upload_file, count_corresp, add_selected_matchs
+from .app import app
+from .utils.matching import matching
+from .utils.generic  import make_cmif, upload_file, count_corresp, add_selected_matchs
 
 
 """
@@ -44,7 +44,7 @@ def handle_matching():
     elif request.method.lower() == "post" and 'makecmif' in request.form:
         print(request.form.getlist('selected'))
         add_selected_matchs(request.form.getlist('selected'))
-        return render_template("pages/download.html")
+        return redirect('/download')
         
     return render_template("pages/matchingtool.html", uploaded= False)
 

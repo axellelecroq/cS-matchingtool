@@ -13,7 +13,7 @@ app = Flask("cS Matching Tool", template_folder=templates, static_folder=statics
 
 
 # local imports
-from .routes import generic
+from .routes import *
 from .utils import generic, matching
 
 def config_app(config_name="test"):
