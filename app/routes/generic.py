@@ -30,6 +30,7 @@ def handle_matching():
             print(file)
             print(file.filename)
             if file.filename.endswith('.xml'):
+                file.filename = 'records.xml'
                 upload_file(file)
                 possibles = matching("app/data/{filename}".format(filename=file.filename))
                 count = count_corresp("app/data/matchs.xml")
