@@ -58,7 +58,7 @@
                     {% for match in matchs%}
                     <tbody>
                         <tr>
-                            <td><input type="radio" name='selected' value="{{matchs}}" id="{{matchs}}"></td>
+                            <td>{{match}}. <input type="checkbox" name='selected' value="{{match}}" id="{{match}}"></td>
                             <th scope="row">Sender</th>
                             <td><a href="{{matchs[match][0][0]}}" target="_blank">{{matchs[match][0][0]}}</a></td>
                             <td><a href="{{matchs[match][0][1]}}" target="_blank">{{matchs[match][0][1]}}</a></td>
