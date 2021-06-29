@@ -29,11 +29,28 @@ def add_selected_matchs(selected: list, possiblesMatchs:dict):
                     try :
                         cs_sender = child[0][0].attrib["ref"]
                         cs_addressee = child[1][0].attrib["ref"]
-                        cs_place = child[0][1].text
-                        cs_date = child[0][2].attrib["when"]
+                        
+                        try:
+                            cs_place = child[0][1].text
+        
+                            if cs_place == None: 
+                                try :
+                                    cs_place = child[0][2].text
+                                except: 
+                                    cs_place = cs_place = child[1][1].text
+                        except: pass
+
+                        try: 
+                            cs_date = child[0][2].attrib["when"]
+                        except:
+                            try : 
+                                cs_date = child[0][1].attrib["when"]
+                            except: 
+                                try : cs_date = child[1][1].attrib["when"]
+                                except : pass
                     except: pass
 
-                    if cs_sender == sender and cs_addressee == addressee and cs_date == date and  cs_place == place:
+                    if cs_sender == sender and cs_addressee == addressee and cs_date == date and cs_place == place:
                         child.set('corresp', link)
     
     tree.write('app/data/matchs.xml',
