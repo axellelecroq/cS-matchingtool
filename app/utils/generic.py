@@ -56,19 +56,6 @@ def count_corresp(file:str):
         
     return count
 
-
-def getJSON(path):
-    """
-    Get data from a JSON file 
-    :param path: str
-    :return: data
-    :rtype: dict
-    """
-    with open(path, encoding="iso-8859-15" ) as data_file:
-       data = json.load(data_file)
-    return data;
-
-
 def make_cmif(file:str):
     """
     Create the CMIF file of matching letters.
