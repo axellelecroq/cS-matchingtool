@@ -25,8 +25,6 @@ def handle_matching():
     if request.method.lower() == "post" and 'upload' in request.form:
         if request.files["records"]:
             file = request.files["records"]
-            print(file)
-            print(file.filename)
             if file.filename.endswith('.xml'):
                 file.filename = 'records.xml'
                 upload_file(file)
@@ -41,7 +39,6 @@ def handle_matching():
         return send_file("app/data/matchs.xml", as_attachment=True, attachment_filename="matchs.xml")
     
     elif request.method.lower() == "post" and 'makecmif' in request.form:
-        print(request.form.getlist('selected'))
         add_selected_matchs(request.form.getlist('selected'))
         return redirect('/download')
         
