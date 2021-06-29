@@ -30,7 +30,7 @@ def handle_matching():
                 upload_file(file)
                 possibles = matching("app/data/{filename}".format(filename=file.filename))
                 count = count_corresp("app/data/matchs.xml")
-                return render_template("pages/matchingtool.html", uploaded = True, matchs = possibles, count_fullmatchs = count)
+                return render_template("pages/matchingtool.html", uploaded = True, matchs = possibles[0], count_corresp = count, count_added = possibles[1])
             else :
                 message = 'Only CMIF file are accepted.'
                 return render_template("pages/matchingtool.html", uploaded= False, noCmif=message)

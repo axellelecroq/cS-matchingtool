@@ -98,4 +98,4 @@ def matching(file: str):
            xml_declaration=True,encoding='utf-8',
            method="xml")
     
-    return possibles
+    return possibles, count
