@@ -40,7 +40,7 @@ def handle_matching():
     
     elif request.method.lower() == "post" and 'makecmif' in request.form:
         possibles = matching("app/data/{filename}".format(filename='records.xml'))
-        add_selected_matchs(request.form.getlist('selected'), possibles)
+        add_selected_matchs(request.form.getlist('selected'), possibles[0])
         return redirect('/download')
         
     return render_template("pages/matchingtool.html", uploaded= False)
