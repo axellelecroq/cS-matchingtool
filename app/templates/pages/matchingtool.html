@@ -4,6 +4,10 @@
     function loading() {
         document.getElementById("spinner").innerHTML = "<div class='spinner-border m-5' role='status'><span class='sr-only'>Loading...</span>";
     }
+    function littleloading() {
+        document.getElementById("littlespinner").innerHTML = "<div class='spinner-border m-5' role='status'><span class='sr-only'>Loading...</span>";
+
+    }
 </script>
 
 
@@ -103,9 +107,10 @@
                     </tbody>
                     {%endfor%}
                 </table>
-                <div>
-                
-                    <input type="submit" value="Create the CMIF file" name='makecmif' class='downloadBtn ' style="margin-left: 3em; margin-bottom: 0.8em;">
+                <div style='display: inline-block'>
+                    <div style='display: inline-block'><input type="submit" value="Create the CMIF file" name='makecmif' class='downloadBtn ' style="margin-left: 3em; margin-bottom: 7.5em; display: inline-block" onclick='littleloading()'>
+                    </div>
+                    <div id='littlespinner' style='display: inline-block'></div>
                 </form>
             </div>
                 {%else%} There is no possible matchs that need to be checked in the file you uploaded. Your can upload the file with all full matchs or try with another file.{%endif%}
