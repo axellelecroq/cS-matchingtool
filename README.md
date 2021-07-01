@@ -56,7 +56,4 @@ _You can install it via this [website](https://www.python.org/downloads/). As a 
 #### Launch
 1. Enter in the app folder
 2. Activate the virtualenv: `source env/bin/activate`
-3. Launch the app : go to the level of `run.py` gile and run this command line `python3 run.py`
-
-
-### On Windows
+3. Launch the app : go to the level of `run.py` file and run this command line `python3 run.py`
