@@ -1,0 +1,47 @@
+{% extends 'container.html' %} {% block content %}
+
+<br>
+<div class='contentTop'>
+    <h1>About</h1>
+</div>
+
+<div class="container contentBottom" id="about">
+    <div class='row'>
+        <div class='col box'>
+            <h4>How does the app work ?</h4>
+            <p class="contentColumn">The user uploads a CMIF file of Alexander von Humboldt letters. The tool performs a query on the
+                <a href="https://kalliope-verbund.info/">Kalliope-Verbund</a> API and compares the user's data to it. </p>
+            <p class="contentColumn">When a full match is found then the Kalliope's link is added to the user's CMIF file in the <i>correspDesc/@corresp</i>. Possible matches are then proposed to the user who can then confirm or not these matches so that they can be added to
+                the file.
+            </p>
+            <p class="contentColumn">The user has the possibility to download in CMIF format the uploaded file with added Kalliope's links or only a file containing the complete matches.
+            </p>
+            <p class="contentColumn" style="margin-bottom: 0.4em;"><i>What is a match ?</i></p>
+            <p class="contentColumn">The tool compares the data on the sender's
+                <a href="https://www.dnb.de/EN/Professionell/Standardisierung/GND/gnd_node.html">GND ID </a> and the receiver's GND ID, the coverage place and the sending date. A complete match means that all four elements match. If it is a possible match,
+                i.e. one that needs user evaluation, then all elements match except the coverage place. </p>
+        </div>
+        <div class='col box'>
+            <h4>CMIF: the accepted format</h4>
+            <p class="contentColumn">The <i>Correspondence Metadata Interchange Format</i> (CMIF) was developed for editors of digital and printed scholarly editions to provide the most important metadata about edited letters online and in a machine-readable form. CMIF is based
+                on the guidelines of the Text Encoding Initiative (TEI) and was developed within the
+                <a href="https://tei-c.org/activities/sig/correspondence/"><i>TEI Correspondence Special Interest Group</i> (SIG)</a>. The format is used on <a href="https://correspsearch.net/">correspSearch</a>.</p>
+            <p class="contentColumn"><i>To know more about CMIF format, please read this
+                <a href="https://encoding-correspondence.bbaw.de/v1/CMIF.html">article</a>. There are also multiple informations on <a href="https://correspsearch.net/">correspSearch</a>.</i></p>
+        </div>
+        <div class='col box'>
+            <h4>About the app development</h4>
+            <p class="contentColumn">This web app was developp by
+                <a href="https://github.com/axellelecroq/">Axelle Lecroq</a> during her internship at the <i>Berlin-Brandenburg
+                    Academy of Sciences
+                    and Humanities</i> (BBAW) in the project
+                <a href="https://edition-humboldt.de/"><i>Travelling Humboldt – Science on the Move</i></a>.
+            </p>
+            <p class="contentColumn">The purpose of this web app is to enrich the
+                <a href="https://correspsearch.net/">correspSearch</a> data by indicating the link to the archive document for the correspondence of Alexander von Humboldt. </p>
+            <p class="contentColumn">This app was developed with
+                <a href="https://flask.palletsprojects.com/en/2.0.x/">Flask</a>, an open-source web development framework in Python. For the frond-end, the framework
+                <a href="https://getbootstrap.com/">Bootstrap</a> (CSS and HTML) was used.</p>
+        </div>
+    </div>
+    <br> {% endblock content %}

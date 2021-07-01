@@ -8,20 +8,23 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('handle_matching')}}" style="font-weight: 600;">matchingTool</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('about')}}">about</a>
+            </li>
         </ul>
         <div>
 
 
 </nav>
-{% with messages = get_flashed_messages(category_filter=["success"]) %} {% if messages %} 
+{% with messages = get_flashed_messages(category_filter=["success"]) %} {% if messages %}
 <nav class="navbar navbar-expand-lg" role="flashmessage">{% for message in messages %}
-<div class="alert flashSuccessMessages" role="alert">{{ message }}</div>
-{% endfor %}
-</div>
-{% endif %} {% endwith %}
+    <div class="alert flashSuccessMessages" role="alert">{{ message }}</div>
+    {% endfor %}
+    </div>
+    {% endif %} {% endwith %}
 </nav> {% block content %}{% endblock content %}
 
-<!-- footer --> 
+<!-- footer -->
 <footer>
     <hr class="style-one" />
     <div class="container">

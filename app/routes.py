@@ -10,6 +10,7 @@ from .utils.generic  import make_cmif, upload_file, count_corresp, add_selected_
 """
 /
 /download
+/about
 """
 
 @app.route("/", methods=["GET", "POST"])
@@ -56,3 +57,8 @@ def save_file():
             return send_file("app/data/output.xml", as_attachment=True, attachment_filename="matchs.xml")
 
     return render_template("pages/download.html")
+
+
+@app.route('/about')
+def about():
+    return render_template('pages/about.html')
