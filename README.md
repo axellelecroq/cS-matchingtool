@@ -9,14 +9,15 @@ This app was developed with Flask, an open-source web development framework in P
 ```
 cS-matchingtool
     ├── app
+    │   ├── data/...
     │   ├── static
     │   │       └── css
     │   │           ├── bootstrap.min.css
     │   │           └── style.css
     │   ├── templates
-    │   │       ├── errors/...
-    │   │       ├── layout/default.html
+    │   │       ├── layouts/default.html
     │   │       ├── pages
+    │   │       │      ├── about.html
     │   │       │      ├── download.html
     │   │       │      └── matchingtool.html
     │   │       ├── partials
