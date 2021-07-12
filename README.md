@@ -49,7 +49,7 @@ _You can install it via this [website](https://www.python.org/downloads/). As a 
 
 ### On Linux
 #### First Launch
-1. Clone this git repository: `git clone https://github.com/axellelecroq/cS-matchingtool.git` and enter in the folder
+1. Clone this git repository: `git clone https://github.com/edition-humboldt-collection/cS-matchingtool.git` and enter in the folder
 2. Install a virtual environnement: `virtualenv -p python3 env`
 3. Activate the virtual env via `source env/bin/activate`
 4. Install `requirements.txt`: renter in the folder cS-matchingtool and use this command line `pip install -r requirements.txt`
