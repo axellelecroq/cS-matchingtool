@@ -4,6 +4,7 @@
     function loading() {
         document.getElementById("spinner").innerHTML = "<div class='spinner-border m-5' role='status'><span class='sr-only'>Loading...</span>";
     }
+
     function littleloading() {
         document.getElementById("littlespinner").innerHTML = "<div class='spinner-border m-5' role='status'><span class='sr-only'>Loading...</span>";
 
@@ -22,97 +23,97 @@
             <h3>Upload</h3>
             <form class="form" enctype="multipart/form-data" action="" method="POST" style='margin-left: 0.5em;'>
                 <div class="custom-file">
-                <input type="file" name="records" class='form-control-file downloadBtn'>
+                    <input type="file" name="records" class='form-control-file downloadBtn'>
                 </div>
                 <p><input type="submit" value="Submit" name='upload' style='margin-top: 1em;' class='downloadBtn' onclick='loading()'></p>
             </form>
             {% if noCmif%}
             <p>{{noCmif}}</p>
-        
+
             {%endif%}
         </div>
         {%endif%}
 
         <div class='col box'>
             <div class="row-fluid">
-                <h3 style="display: inline-block;">Matchs</h3>
+                <h3 style="display: inline-block;">Matches</h3>
                 {% if uploaded == True %}
                 <form class="form" enctype="multipart/form-data" action="" method="POST" style='margin-left: 0.5em; display: inline-block'>
                     <input type="submit" value="Download" name='fullMatchs' class='downloadBtn ' style="margin-left: 3em; margin-bottom: 0.8em;">
                 </form>
             </div>
-            <p style="margin: 0 0.5em 0em 0.5em;">{{count_added}} full matchs were added. Thus, {{count_corresp}} letters have the @corresp attribute.</p>
+            <p style="margin: 0 0.5em 0em 0.5em;">{{count_added}} full matches were added. Thus, {{count_corresp}} letters have the <i>@corresp</i> attribute.</p>
             <p style="margin: 0 0.5em 2em 0.5em;">A full match means that sender, addressee, coverage place and date matched.</p>
-            <h3>Possibles matchs</h3>
+            <h3>Possibles matches</h3>
             <div style="margin: 0 0.5em 0em 0.5em;">
                 {%if matchs%}
-                <p style="margin-bottom:0">The match is possible when sender, addresse and date matched. Only the coverage place doesn't match. </p>
-                <p>You can select the match if you consider it to be a match although the data doesn't match 100%. The selected matches will be added to the CMIF file once they are sumitted.</p>
+                <p style="margin-bottom:0">The match is possible when sender, addresse and date matched. Here, only the coverage place doesn't match. </p>
+                <p>You can select the match if you consider it to be a match although the data doesn't match 100%. The selected matches will be added to the CMIF file once they are submitted.</p>
                 <form class="form" enctype="multipart/form-data" action="" method="POST" style='margin-left: 0.5em; display: inline-block'>
-                <table class="table table-sm">
+                    <table class="table table-sm">
 
-                    <thead class="thead-light">
-                        <tr>
-                            <th scope="col"></th>
-                            <th scope="col">Element</th>
-                            <th scope="col">Kalliope data</th>
-                            <th scope="col">cS data</th>
-                        </tr>
-                    </thead>
-                    {% for match in matchs%}
-                    <tbody>
-                        <tr>
-                            <td>{{match}}. <input type="checkbox" name='selected' value="{{match}}" id="{{match}}"></td>
-                            <th scope="row">Sender</th>
-                            <td><a href="{{matchs[match][0][0]}}" target="_blank">{{matchs[match][0][0]}}</a></td>
-                            <td><a href="{{matchs[match][0][1]}}" target="_blank">{{matchs[match][0][1]}}</a></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <th scope="row">Addressee</th>
-                            <td><a href="{{matchs[match][1][0]}}" target="_blank">{{matchs[match][1][0]}}</a></td>
-                            <td><a href="{{matchs[match][1][1]}}" target="_blank">{{matchs[match][1][1]}}</a></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <th scope="row">Date</th>
-                            {% if matchs[match][2][0] != matchs[match][2][1]%}
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Element</th>
+                                <th scope="col">Kalliope data</th>
+                                <th scope="col">cS data</th>
+                            </tr>
+                        </thead>
+                        {% for match in matchs%}
+                        <tbody>
+                            <tr>
+                                <td>{{match}}. <input type="checkbox" name='selected' value="{{match}}" id="{{match}}"></td>
+                                <th scope="row">Sender</th>
+                                <td><a href="{{matchs[match][0][0]}}" target="_blank">{{matchs[match][0][0]}}</a></td>
+                                <td><a href="{{matchs[match][0][1]}}" target="_blank">{{matchs[match][0][1]}}</a></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <th scope="row">Addressee</th>
+                                <td><a href="{{matchs[match][1][0]}}" target="_blank">{{matchs[match][1][0]}}</a></td>
+                                <td><a href="{{matchs[match][1][1]}}" target="_blank">{{matchs[match][1][1]}}</a></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <th scope="row">Date</th>
+                                {% if matchs[match][2][0] != matchs[match][2][1]%}
 
-                            <td style="color:red">{{matchs[match][2][0]}}</td>
-                            <td style="color:red">{{matchs[match][2][1]}}</td>
-                            {%else %}
-                            <td>{{matchs[match][2][0]}}</td>
-                            <td>{{matchs[match][2][1]}}</td>
-                            {%endif%}
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <th scope="row">Coverage place</th>
-                            {%if matchs[match][3][0] != matchs[match][3][1]%}
-                            <td style="color:red">{{matchs[match][3][0]}}</td>
-                            <td style="color:red">{{matchs[match][3][1]}}</td>
-                            {%else%}
-                            <td>{{matchs[match][3][0]}}</td>
-                            <td>{{matchs[match][3][1]}}</td>
-                            {%endif%}
-                        </tr>
+                                <td style="color:red">{{matchs[match][2][0]}}</td>
+                                <td style="color:red">{{matchs[match][2][1]}}</td>
+                                {%else %}
+                                <td>{{matchs[match][2][0]}}</td>
+                                <td>{{matchs[match][2][1]}}</td>
+                                {%endif%}
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <th scope="row">Coverage place</th>
+                                {%if matchs[match][3][0] != matchs[match][3][1]%}
+                                <td style="color:red">{{matchs[match][3][0]}}</td>
+                                <td style="color:red">{{matchs[match][3][1]}}</td>
+                                {%else%}
+                                <td>{{matchs[match][3][0]}}</td>
+                                <td>{{matchs[match][3][1]}}</td>
+                                {%endif%}
+                            </tr>
 
-                        <tr>
-                            <td></td>
-                            <th scope="row">Link</th>
-                            <td>
-                                <a href="{{matchs[match][4]}}" target="_blank">on Kalliope</a></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                    {%endfor%}
-                </table>
-                <div style='display: inline-block'>
-                    <div style='display: inline-block'><input type="submit" value="Create the CMIF file" name='makecmif' class='downloadBtn ' style="margin-left: 3em; margin-bottom: 7.5em; display: inline-block" onclick='littleloading()'>
-                    </div>
-                    <div id='littlespinner' style='display: inline-block'></div>
+                            <tr>
+                                <td></td>
+                                <th scope="row">Link</th>
+                                <td>
+                                    <a href="{{matchs[match][4]}}" target="_blank">on Kalliope</a></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                        {%endfor%}
+                    </table>
+                    <div style='display: inline-block'>
+                        <div style='display: inline-block'><input type="submit" value="Create the CMIF file" name='makecmif' class='downloadBtn ' style="margin-left: 3em; margin-bottom: 7.5em; display: inline-block" onclick='littleloading()'>
+                        </div>
+                        <div id='littlespinner' style='display: inline-block'></div>
                 </form>
-            </div>
+                </div>
                 {%else%} There is no possible matchs that need to be checked in the file you uploaded. Your can upload the file with all full matchs or try with another file.{%endif%}
             </div>
             {% else %}
